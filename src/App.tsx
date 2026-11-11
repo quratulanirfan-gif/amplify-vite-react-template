@@ -13,6 +13,13 @@ function App() {
     });
   }, []);
 
+  async function createTodo() {
+    const content = window.prompt("Todo content");
+    if (content) {
+      await client.models.Todo.create({ content });
+    }
+  }
+
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id });
   }
@@ -25,8 +32,7 @@ function App() {
         {todos.map((todo) => (
           <li
             onClick={() => deleteTodo(todo.id)}
-            key={todo.id}
-          >
+            key={todo.id}>
             {todo.content}
           </li>
         ))}
